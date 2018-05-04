@@ -65,11 +65,11 @@ function newGame(){
 
 //==================New Game function==============================
 function newQuestion(){
+	
 	$("#message").empty();
 	$("#correctedAnswer").empty();
 	$("#gif").empty();
 	answered = true;
-	
 //==================setting up questions==========================
 	$(".question").html("<h2>" + triviaQuestions[questionNum].question + "</h2>");
 	//==========================answer options===================================
@@ -94,10 +94,10 @@ function countdown(){
 	seconds = 20;
 	$("#timeLeft").html("<h3>Time Remaining: " + seconds + "</h3>");
 	answered = true;
-	time = setInterval(showCountdown, 1000);
+	time = setInterval(startCountdown, 1000);
 }
-
-function showCountdown(){
+//==========================start countdown==================================
+function startCountdown(){
 	seconds--;
 	$("#timeLeft").html("<h3>Time Remaining: " + seconds + "</h3>");
 	if(seconds < 1){
@@ -116,6 +116,13 @@ function answerPage(){
 	var gifs = $("<img>");
 	gifs.attr("src", "assets/images/" + gifList[questionNum] + ".gif");
 	$("#gif").html(gifs);
+
+	if(questionNum == (triviaQuestions.length-1)){
+		setTimeout(scoreboard, 4000);
+	} else{
+		questionNum++;
+		setTimeout(newQuestion, 4000);
+	}	
 	
 //==========================Checking answers is correct or incorrect==================
 	if((playerSelect == correctAnswerIndex) && (answered == true)){
@@ -132,12 +139,6 @@ function answerPage(){
 		answered = true;
 	}
 	
-	if(questionNum == (triviaQuestions.length-1)){
-		setTimeout(scoreboard, 4000);
-	} else{
-		questionNum++;
-		setTimeout(newQuestion, 4000);
-	}	
 }
 
 //========================show final page========================================
