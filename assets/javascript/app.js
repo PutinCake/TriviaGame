@@ -91,9 +91,9 @@ function newQuestion(){
 }
 //========================countdown section==============================
 function countdown(){
-	seconds = 25;
+	seconds = 20;
 	$("#timeLeft").html("<h3>Time Remaining: " + seconds + "</h3>");
-	ansered = true;
+	answered = true;
 	time = setInterval(showCountdown, 1000);
 }
 
@@ -108,29 +108,27 @@ function showCountdown(){
 }
 
 function answerPage(){
-	$("#questionNum").empty();
 	$(".thisChoice").empty(); 
 	$(".question").empty();
-
-	var rightAnswerText = triviaQuestions[questionNum].answerList[triviaQuestions[questionNum].answer];
-	var rightAnswerIndex = triviaQuestions[questionNum].answer;
+//========set up standard======================================================
+	var correctAnswerText = triviaQuestions[questionNum].answerList[triviaQuestions[questionNum].answer];
+	var correctAnswerIndex = triviaQuestions[questionNum].answer;
 	var gifs = $("<img>");
 	gifs.attr("src", "assets/images/" + gifList[questionNum] + ".gif");
 	$("#gif").html(gifs);
 	
-	
 //==========================Checking answers is correct or incorrect==================
-	if((playerSelect == rightAnswerIndex) && (answered == true)){
+	if((playerSelect == correctAnswerIndex) && (answered == true)){
 		correctAnswer++;
 		$("#message").html(messages.correct);
-	} else if((playerSelect != rightAnswerIndex) && (answered == true)){
+	} else if((playerSelect != correctAnswerIndex) && (answered == true)){
 		incorrectAnswer++;
 		$("#message").html(messages.incorrect);
-		$("#correctedAnswer").html("The correct answer was: " + rightAnswerText);
+		$("#correctedAnswer").html("The correct answer was: " + correctAnswerText);
 	} else{
 		unanswered++;
 		$("#message").html(messages.endTime);
-		$("#correctedAnswer").html("The correct answer was: " + rightAnswerText);
+		$("#correctedAnswer").html("The correct answer was: " + correctAnswerText);
 		answered = true;
 	}
 	
